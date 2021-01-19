@@ -1,13 +1,12 @@
 # GeoDjango Project 
 
 ## OS Ubuntu 18.04
+show weather forecast using geodjango, leafletjs and posgis using.
 
 ### USED Technologies -
 ``` 
  python, django, Geodjango, leaflet.js, postgis
 ```
-
-show weather forecast using geodjango, leafletjs and posgis using.
 
 ### Install requirements for the project:
    ```
