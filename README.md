@@ -42,4 +42,6 @@ show weather forecast using geodjango, leafletjs and posgis using.
    ```
    python manage.py createsuperuser
    ```
+![Image](/ScreenShot.png)
+
 ## NOTE : After that login and click Cities and add city and location
