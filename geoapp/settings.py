@@ -62,10 +62,10 @@ WSGI_APPLICATION = 'geoapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'db_geodjango',
+        'NAME': 'geo',
         'USER': 'postgres',
-        'PASSWORD': 'root',
-        'HOST': 'localhost',
+        'PASSWORD': 'postgres',
+        'HOST': 'geodjango_db',
         'PORT': '5432'
     }
 }
