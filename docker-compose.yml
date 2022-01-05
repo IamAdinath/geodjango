@@ -1,0 +1,52 @@
+version: '3.6'
+
+
+x-environment: &environment
+  POSTGRES_DB: demo
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+  POSTGRES_HOST: db
+  GOOGLE_MAP_API_KEY: ${AIzaSyBKBhUG8m4TrWD7e-n1lAw2n75KlQptt0I}
+
+
+services:
+
+  db:
+    image: postgres:14.0
+    container_name: db
+    environment:
+      <<: *environment
+    expose:
+      - 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432
+
+  web:
+    build: .
+    container_name: web
+    environment:
+      <<: *environment
+    command: bash -c "python /code/manage.py makemigrations && python /code/manage.py migrate --noinput && python /code/manage.py runserver 0.0.0.0:7000"
+    volumes:
+      - .:/code
+    expose:
+      - 7000
+    ports:
+      - 7000:7000
+    depends_on:
+      - db
+
+#  nginx:
+#    image: nginx:latest
+#    container_name: nginx
+#    ports:
+#      - 7000
+#    volumes:
+#      - ./config/nginx:/etc/nginx/conf.d
+#    depends_on:
+#      - web
+
+volumes:
+  postgres_data:
