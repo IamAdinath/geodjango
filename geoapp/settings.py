@@ -64,8 +64,8 @@ DATABASES = {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'geo',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'geodjango_db',
+        'PASSWORD': 'adinath-17',
+        'HOST': 'db',
         'PORT': '5432'
     }
 }

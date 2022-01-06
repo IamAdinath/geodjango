@@ -5,48 +5,34 @@ x-environment: &environment
   POSTGRES_DB: geo
   POSTGRES_USER: postgres
   POSTGRES_PASSWORD: postgres
-  POSTGRES_HOST: geodjango_db
-  GOOGLE_MAP_API_KEY: ${AIzaSyBKBhUG8m4TrWD7e-n1lAw2n75KlQptt0I}
+  POSTGRES_HOST: db
+
 
 
 services:
 
-  geodjango_db:
-    image: postgres:14.0
-    container_name: geodjango_db
+  db:
+    image: postges:14
+    container_name: db
     environment:
       <<: *environment
-    expose:
-      - 5432
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports:
       - 5432
 
-  geodjango_web:
+  web:
     build: .
-    container_name: geodjango_web
+    container_name: web_geo
     environment:
       <<: *environment
-    command: bash -c "python /code/manage.py makemigrations && python /code/manage.py migrate --noinput && python /code/manage.py runserver 0.0.0.0:7000"
+    command: bash -c "python /code/manage.py migrate --noinput && python /code/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
-    expose:
-      - 7000
     ports:
-      - 7000:7000
+      - 8000:8000
     depends_on:
-      - geodjango_db
-
-#  nginx:
-#    image: nginx:latest
-#    container_name: nginx
-#    ports:
-#      - 7000
-#    volumes:
-#      - ./config/nginx:/etc/nginx/conf.d
-#    depends_on:
-#      - web
+      - db
 
 volumes:
   postgres_data:
